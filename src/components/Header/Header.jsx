@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './Header.module.css';
+import s from './Header.module.css';//підключення стилів як модуль (якобєкт з ключом назви класа і значенням нового класа)
 
 const Header = () => {
   return (
