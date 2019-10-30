@@ -20,6 +20,8 @@ const App = () => {
 
         <div className="app-wrapper-content">
           {/* Route використовується для роботи як силки, path - адрес сторінки, component - в цей параметр ми передаєм компоненту яка буде віддображатись */}
+          {/* path="/dialogs" - це путь читається з корня то навіть якшо буде такий путь /dialogs/spam/dkkmd всеодно буде показуватись цей компонента */}
+          {/* exact - говорить щоб компонента виводилась якщо путь в точ точ такий самий  */}
           <Route path="/dialogs" component={Dialogs} /> 
           <Route path="/profile" component={Profile} />
           <Route path="/news" component={News} />
