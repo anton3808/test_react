@@ -18,3 +18,7 @@
 .messages .message{
   color: white;
 }
+
+button{
+  display: block;
+}

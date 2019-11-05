@@ -29,5 +29,14 @@ let state = {
   
 }
 
+export let addPost = (postMessage) => {
+  let newPost = {
+    id: 5,
+    message: postMessage,
+    likesCount: 0
+  };//створюєм обєкт нового поста по структурі яка вже створена в state
+
+  state.profilePage.posts.push(newPost);//добавляєм цей обєкт нового поста в змінну state обєкт profilePage і в масив posts
+}
 
 export default state;
