@@ -1,3 +1,5 @@
+import { renderEntireTree } from "../render";
+
 let state = {
   profilePage: {
     posts: [ 
@@ -37,6 +39,7 @@ export let addPost = (postMessage) => {
   };//створюєм обєкт нового поста по структурі яка вже створена в state
 
   state.profilePage.posts.push(newPost);//добавляєм цей обєкт нового поста в змінну state обєкт profilePage і в масив posts
+  renderEntireTree(state);
 }
 
 export default state;
