@@ -13,7 +13,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 
 const App = (props) => {
   return (
-    <BrowserRouter>{/* обгортка для route */}
+    
       <div className='app-wrapper'>
         <Header />
         <Navbar />
@@ -32,7 +32,7 @@ const App = (props) => {
         </div>
 
       </div>
-    </BrowserRouter>
+    
   );
 }
 
