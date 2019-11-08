@@ -11,9 +11,12 @@ const MyPosts = (props) => {
   let newPostElement = React.createRef();//створює силку на елемент з jsx(просто силка яка нікуди не веде)
 
   let addPost = () => {
+    props.addPost();
+  }
+
+  let onPostChange = () => {
     let text = newPostElement.current.value;
-    props.addPost(text);
-    newPostElement.current.value = '';
+    props.updateNewPostText(text);
   }
 
   return (
@@ -21,7 +24,7 @@ const MyPosts = (props) => {
       <h3> My posts </h3>
       <div>
         <div>
-          <textarea ref={newPostElement}></textarea>
+          <textarea ref={newPostElement} onChange={onPostChange} value={props.newPostText} />
           {/* привязуєм створену силку до елемента */}
         </div>
         <div>
@@ -38,6 +41,9 @@ const MyPosts = (props) => {
   );
 
 }
+
+
+
 
 
 export default MyPosts;

@@ -24,8 +24,8 @@ const App = (props) => {
           {/* exact - говорить щоб компонента виводилась якщо путь в точ точ такий самий  */}
 
 
-          <Route path="/dialogs" render={ () => <Dialogs state={props.state.dialogsPage} /> } /> 
-          <Route path="/profile" render={ () => <Profile state={props.state.profilePage} addPost={props.addPost} /> } />
+          <Route path="/dialogs" render={ () => <Dialogs state={props.state.dialogsPage} addMessageText={props.addMessageText} updateNewMessageText={props.updateNewMessageText}/> } /> 
+          <Route path="/profile" render={ () => <Profile profilePage={props.state.profilePage} addPost={props.addPost} updateNewPostText={props.updateNewPostText} /> } />
           <Route path="/news" render={ () => <News /> } />
           <Route path="/music" render={ () => <Music /> } />
           <Route path="/Settings" render={ () => <Settings /> } />

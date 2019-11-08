@@ -1,4 +1,6 @@
-import { renderEntireTree } from "../render";
+let renderEntireTree = () => {
+  console.log("state");
+}
 
 let state = {
   profilePage: {
@@ -7,7 +9,8 @@ let state = {
       {id: 2, message: 'It\'s my first post', likesCount: 11},
       {id: 3, message: 'Blabla', likesCount: 12}, 
       {id: 4, message: 'Dada', likesCount: 11}
-    ]
+    ],
+    newPostText: 'it-kamasutra'
   },
 
   dialogsPage: {
@@ -25,21 +28,53 @@ let state = {
       { id: 3, message: 'Yo' },
       { id: 4, message: 'Yo' },
       { id: 5, message: 'Yo' }
-    ]
+    ],
+    newMessageText: 'it-kamasutra'
   }
   
   
 }
 
-export let addPost = (postMessage) => {
+export const addPost = () => {
   let newPost = {
     id: 5,
-    message: postMessage,
+    message: state.profilePage.newPostText,
     likesCount: 0
   };//створюєм обєкт нового поста по структурі яка вже створена в state
 
+
   state.profilePage.posts.push(newPost);//добавляєм цей обєкт нового поста в змінну state обєкт profilePage і в масив posts
+  state.profilePage.newPostText = '';
   renderEntireTree(state);
+}
+export const updateNewPostText = (newText) => {
+  state.profilePage.newPostText = newText;
+  renderEntireTree(state);
+}
+
+
+
+
+
+// export let addMessageText = () => {
+//   let newMessage = {
+//     id: 6,
+//     message: state.dialogsPage.newMessageText
+//   };//створюєм обєкт нового поста по структурі яка вже створена в state
+
+
+//   state.dialogsPage.dialogsPage.push(newMessage);//добавляєм цей обєкт нового поста в змінну state обєкт profilePage і в масив posts
+//   state.dialogsPage.newMessageText = '';
+//   renderEntireTree(state);
+// }
+// export let updateNewMessageText = (newText) => {
+//   state.dialogsPage.newMessageText = newText;
+//   renderEntireTree(state);
+// }
+
+
+export const subscribe = (observer) => {
+ renderEntireTree = observer;
 }
 
 export default state;
