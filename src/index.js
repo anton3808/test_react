@@ -1,6 +1,6 @@
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import store from './redux/state';
+import store from './redux/redux-store';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -19,7 +19,10 @@ let renderEntireTree = (state) => {
 
 renderEntireTree(store.getState());
 
-store.subscribe(renderEntireTree);//callback function
+store.subscribe(() => {
+  let state = store.getState();
+  renderEntireTree(state);
+});//callback function
 
 
 // If you want your app to work offline and load faster, you can change
