@@ -1,6 +1,8 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
+import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../redux/state';
+
 
 
 
@@ -11,12 +13,13 @@ const MyPosts = (props) => {
   let newPostElement = React.createRef();//створює силку на елемент з jsx(просто силка яка нікуди не веде)
 
   let addPost = () => {
-    props.addPost();
+    props.dispatch( addPostActionCreator() );//диспатчим обэкт
   }
 
   let onPostChange = () => {
     let text = newPostElement.current.value;
-    props.updateNewPostText(text);
+    let action = updateNewPostTextActionCreator( text );//записываем actionCreator
+    props.dispatch( action );//диспатчим обэкт
   }
 
   return (

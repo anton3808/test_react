@@ -12,7 +12,8 @@ import {BrowserRouter, Route} from "react-router-dom";
 let renderEntireTree = (state) => {
   ReactDOM.render(
     <BrowserRouter>{/* обгортка для route */}
-      <App state={state} addPost={store.addPost.bind(store)}  updateNewPostText={store.updateNewPostText.bind(store)} />
+      <App state={state} dispatch={store.dispatch.bind(store)} store={store} />
+      {/* bind(store) - біндим у store бо ми його взяли у store, щоб всередині dispatch this був store  */}
     </BrowserRouter>, document.getElementById('root'));
 }
 
