@@ -1,25 +1,22 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../redux/profile-reducer';
 
 
 
 
 const MyPosts = (props) => {
-
   let postsElements = props.posts.map( p => <Post message={p.message} likesCount={p.likesCount}/>);
 
   let newPostElement = React.createRef();//створює силку на елемент з jsx(просто силка яка нікуди не веде)
 
-  let addPost = () => {
-    props.dispatch( addPostActionCreator() );//диспатчим обэкт
+  let onAddPost = () => {
+    props.addPost();
   }
 
   let onPostChange = () => {
     let text = newPostElement.current.value;
-    let action = updateNewPostTextActionCreator( text );//записываем actionCreator
-    props.dispatch( action );//диспатчим обэкт
+    props.updateNewPostText(text);
   }
 
   return (
@@ -31,7 +28,7 @@ const MyPosts = (props) => {
           {/* привязуєм створену силку до елемента */}
         </div>
         <div>
-          <button onClick={ addPost }>Add post</button>
+          <button onClick={ onAddPost }>Add post</button>
           {/* addPost - ми просто передаєм функцію, а addPost() - визиваєм функцію */}
         </div>
       </div>
