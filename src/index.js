@@ -10,7 +10,6 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {Provider} from 'react-redux';
 
 
-let renderEntireTree = (state) => {
   ReactDOM.render(
     <BrowserRouter>{/* обгортка для route */}
       <Provider store={store}>{/* провайдер, поставщик даних к дочерним елементам */}
@@ -19,14 +18,7 @@ let renderEntireTree = (state) => {
         {/* bind(store) - біндим у store бо ми його взяли у store, щоб всередині dispatch this був store  */}
       </Provider>
     </BrowserRouter>, document.getElementById('root'));
-}
 
-renderEntireTree(store.getState());
-
-store.subscribe(() => {
-  let state = store.getState();
-  renderEntireTree(state);
-});//callback function
 
 
 // If you want your app to work offline and load faster, you can change

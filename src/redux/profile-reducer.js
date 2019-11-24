@@ -15,20 +15,26 @@ let initialState = {
 const profileReducer = (state = initialState, action) => {//state = initialState - если state не передан в параметры то пусть по умолчанию state равно initialState
 
   switch( action.type ) {
-    case ADD_POST: 
+
+    case ADD_POST: {
       let newPost = {
         id: 5,
         message: state.newPostText,
         likesCount: 0
       };//створюєм обєкт нового поста по структурі яка вже створена в state
-    
-      state.posts.push(newPost);//добавляєм цей обєкт нового поста в змінну state обєкт profilePage і в масив posts
-      state.newPostText = '';
-      return state;
 
-    case UPDATE_NEW_POST_TEXT:
-      state.newPostText = action.text;
-      return state;
+      let stateCopy = {...state};//поверхносное копирование
+      stateCopy.posts = [...state.posts];//глубокое копирование
+      stateCopy.posts.push(newPost);//добавляєм цей обєкт нового поста в змінну state обєкт profilePage і в масив posts
+      stateCopy.newPostText = '';
+      return stateCopy;
+    }
+
+    case UPDATE_NEW_POST_TEXT: {
+      let stateCopy = {...state};//поверхносное копирование
+      stateCopy.newPostText = action.text;
+      return stateCopy;
+    }
 
     default: 
       return state;
