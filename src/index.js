@@ -7,13 +7,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import {BrowserRouter, Route} from "react-router-dom";
+import {Provider} from 'react-redux';
 
 
 let renderEntireTree = (state) => {
   ReactDOM.render(
     <BrowserRouter>{/* обгортка для route */}
-      <App state={state} dispatch={store.dispatch.bind(store)} store={store} />
-      {/* bind(store) - біндим у store бо ми його взяли у store, щоб всередині dispatch this був store  */}
+      <Provider store={store}>{/* провайдер, поставщик даних к дочерним елементам */}
+        {/* value={store} тоисть всем дочерним компонентам будет доступерн через параметр value гловальная переменая store */}
+        <App />
+        {/* bind(store) - біндим у store бо ми його взяли у store, щоб всередині dispatch this був store  */}
+      </Provider>
     </BrowserRouter>, document.getElementById('root'));
 }
 
