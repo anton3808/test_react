@@ -23,17 +23,20 @@ const profileReducer = (state = initialState, action) => {//state = initialState
         likesCount: 0
       };//створюєм обєкт нового поста по структурі яка вже створена в state
 
-      let stateCopy = {...state};//поверхносное копирование
-      stateCopy.posts = [...state.posts];//глубокое копирование
-      stateCopy.posts.push(newPost);//добавляєм цей обєкт нового поста в змінну state обєкт profilePage і в масив posts
-      stateCopy.newPostText = '';
-      return stateCopy;
+      return {
+        ...state,
+        posts: [...state.posts, newPost],//добавляєм цей обєкт нового поста в змінну state обєкт profilePage і в масив posts
+        newPostText: ''
+      };//поверхносное копирование
     }
 
     case UPDATE_NEW_POST_TEXT: {
-      let stateCopy = {...state};//поверхносное копирование
-      stateCopy.newPostText = action.text;
-      return stateCopy;
+
+      return {
+        ...state,
+        newPostText: action.text
+      };//поверхносное копирование
+
     }
 
     default: 

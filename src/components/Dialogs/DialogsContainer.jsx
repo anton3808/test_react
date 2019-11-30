@@ -12,11 +12,11 @@ const mapStateToProps = (state) => {//во время конектинга фу�
 
 const mapDispatchToProps = (dispatch) => {//во время конектинга функция connect передаст в функцию mapDispatchToProps dispatch
   return {//возвращает callbacks functions которие мы будем отправлять в призентационую компоненту
-    updateNewMessageBody: () => {
-      dispatch( sendMessageCreator() );//функция sendMessageCreator возвращает type action который мы потом dispatch
+    updateNewMessageBody: (body) => {
+      dispatch( updateNewMessageBodyCreator(body) );//функция sendMessageCreator возвращает type action который мы потом dispatch
     },
-    sendMessage: (body) => {
-      dispatch( updateNewMessageBodyCreator(body) );
+    sendMessage: () => {
+      dispatch( sendMessageCreator() );
     }
   }
 }

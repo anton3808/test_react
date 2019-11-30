@@ -14,8 +14,8 @@ const Dialogs = (props) => {
 
   // промапував масив обєктів і створив компоненти
   
-  let dialogsElements = state.dialogs.map( dialog => <DialogItem name={dialog.name} id={dialog.id} />);
-  let messagesElements = state.messages.map( message => <Message message={message.message} />);
+  let dialogsElements = state.dialogs.map( dialog => <DialogItem name={dialog.name} key={dialog.id} id={dialog.id} />);
+  let messagesElements = state.messages.map( message => <Message key={message.id} message={message.message} />);
   let newMessagesBody = state.newMessagesBody;
 
 
