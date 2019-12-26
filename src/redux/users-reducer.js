@@ -42,9 +42,9 @@ const usersReducer = (state = initialState, action) => {//state = initialState -
         })//map возвращает новый масив на основе старого масива (мапим кожний елемент масива u) тоисть идентично до записи [...state.users]
       }
 
-    case SET_USERS:
+    case SET_USERS: {
       return { ...state, users: [ ...state.users, ...action.users ] }// беру масив users в state которий там записан и склеиваю его тоисть добавляю к нему масив users з сервера которий мы передали в actionCreator (перезаписую всех пользователей в state)
-    
+    }
     default: 
       return state;
   }
