@@ -8,11 +8,13 @@ class Users extends React.Component{
 
   constructor (props) {//вывивается только один раз коград создается обэкт класса
     super(props);
+  }
 
+
+  componentDidMount(){ //вмонтирование (только один раз)
     axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
       this.props.setUsers(response.data.items)
-    }); 
-
+    });
   }
 
 
