@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import { toggleFetchingAC, setUsersTotalCountAC, setCurrentPageAC, followAC, unfollowAC, setUsersAC } from '../../redux/users-reducer';
+import { toggleIsFetching, setTotalUsersCount, setCurrentPage, follow, unfollow, setUsers } from '../../redux/users-reducer';
 import * as axios from 'axios'; //библиотека для запросові
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
@@ -59,35 +59,8 @@ let mapStateToProps = (state) => {//с помощью этой функции п
   }
 }
 
-let mapDispatchToProps = (dispatch) => {//передаем callbacks functions
-  return {
-    follow: (userId) => {
-      dispatch( followAC(userId) );//диспатчим результат визова функции followAC тоисть action
-    },
 
-    unfollow: (userId) => {
-      dispatch( unfollowAC(userId) );
-    },
-
-    setUsers: (users) => {
-      dispatch( setUsersAC(users) );
-    },
-
-    setCurrentPage: (pageNumber) => {
-      dispatch( setCurrentPageAC(pageNumber) );
-    },
-
-    setTotalUsersCount: (totalCount) => {
-      dispatch( setUsersTotalCountAC(totalCount) );
-    },
-
-    toggleIsFetching: (isFetching) => {
-      dispatch( toggleFetchingAC(isFetching) );
-    }
-
-    
-  }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer) ;
+//передаем вторим параметром обэкт функций AC, а react сам обернет их и продиспатчит(вместо mapDispatchToProps)
+export default connect(mapStateToProps, 
+  { follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching }
+)(UsersContainer) ;
