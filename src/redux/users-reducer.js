@@ -3,12 +3,14 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 
 let initialState = {
    users: [],
    pageSize: 5,
    totalUsersCount: 0,
-   currentPage: 2
+   currentPage: 2,
+   isFetching: true
 };
 
 
@@ -49,6 +51,9 @@ const usersReducer = (state = initialState, action) => {//state = initialState -
     case SET_TOTAL_USERS_COUNT: {
       return { ...state, totalUsersCount: action.count }// беру масив users в state которий там записан и склеиваю его тоисть добавляю к нему масив users з сервера которий мы передали в actionCreator (перезаписую всех пользователей в state)
     }
+    case TOGGLE_IS_FETCHING: {
+      return { ...state, isFetching: action.isFetching }// беру масив users в state которий там записан и склеиваю его тоисть добавляю к нему масив users з сервера которий мы передали в actionCreator (перезаписую всех пользователей в state)
+    }
 
     
 
@@ -68,6 +73,6 @@ export const unfollowAC = (userId) => ( { type: UNFOLLOW, userId } )
 export const setUsersAC = (users) => ( { type: SET_USERS, users } )//берем пользователей з сервака и засетаем в state
 export const setCurrentPageAC = (currentPage) => ( { type: SET_CURRENT_PAGE, currentPage } )
 export const setUsersTotalCountAC = (totalUsersCount) => ( { type: SET_TOTAL_USERS_COUNT, count: totalUsersCount } )
-
+export const toggleFetchingAC = (isFetching) => ( { type: TOGGLE_IS_FETCHING, isFetching } )
 
 export default usersReducer;
