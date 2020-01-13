@@ -11,7 +11,11 @@ import { withRouter } from 'react-router-dom';
 class ProfileContainer extends React.Component{
 
   componentDidMount() {//метод жизненого цикла
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`) //запрос на сервак
+    let userId = this.props.match.params.userId;//берем номер пользователя с урл адреса с помощю оброщения к параметрам строки
+    if (!userId) { //если айди нету то захаркодим значение 2
+      userId = 2;
+    }
+    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId) //запрос на сервак
     .then(response => {
       this.props.setUserProfile(response.data);
     });
@@ -30,6 +34,6 @@ let mapStateToProps = (state) => ({
   profile: state.profilePage.profile
 });
 
+let withUrlDataContainerComponent = withRouter(ProfileContainer);//вернет новую компоненту отресует ProfileContainer и в нее закинутся данние из урла
 
-
-export default connect(mapStateToProps, {setUserProfile} )(ProfileContainer);
+export default connect(mapStateToProps, {setUserProfile} )(withUrlDataContainerComponent);

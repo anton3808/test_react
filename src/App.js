@@ -26,7 +26,7 @@ const App = (props) => {
 
           {/* Route это компонента еоторая смотрит за url, если он совпадает то делает render */}
           <Route path="/dialogs" render={ () => <DialogsContainer /> } />
-          <Route path="/profile" render={ () => <ProfileContainer /> } />
+          <Route path="/profile/:userId?" render={ () => <ProfileContainer /> } /> {/* :userId - параметр з урл адреса, ? - етот знак сообщает что етот параметр не обязательний*/}
           <Route path="/users" render={ () => <UsersContainer /> } />
           <Route path="/news" render={ () => <News /> } />
           <Route path="/music" render={ () => <Music /> } />
