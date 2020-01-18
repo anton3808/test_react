@@ -3,6 +3,7 @@ import userPhoto from '../../assets/images/user.png';
 import styles from './Users.module.css';
 import { NavLink } from 'react-router-dom';
 import * as axios from 'axios'; //библиотека для запросові
+import { usersAPI, unFollow, follow } from '../../api/api';
 
 let Users = (props) => {
 
@@ -37,14 +38,14 @@ let Users = (props) => {
             {u.followed
               ? <button onClick={() => { 
 
-                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                  withCredentials: true, //настройки запроса ставим true
-                  headers: {
-                    "API-KEY": "95db1b82-ff10-47ab-a2fc-b4324afb1a65"
-                  }
-                })
-                  .then(response => {
-                    if( response.data.resultCode == 0 ) { //если отподписка прошла успешно
+                // axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                //   withCredentials: true, //настройки запроса ставим true
+                //   headers: {
+                //     "API-KEY": "95db1b82-ff10-47ab-a2fc-b4324afb1a65"
+                //   }
+                // })
+                unFollow(u.id).then(data => {
+                    if( data.resultCode == 0 ) { //если отподписка прошла успешно
                       props.unfollow(u.id);
                     }
                   });
@@ -54,13 +55,8 @@ let Users = (props) => {
               }} >Unfollow</button>
               : <button onClick={() => { 
 
-                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                  withCredentials: true, //настройки запроса ставим true
-                  headers: {
-                    "API-KEY": "95db1b82-ff10-47ab-a2fc-b4324afb1a65"
-                  }
-                })
-                  .then(response => {
+                
+                follow(u.id).then(response => {
                     if( response.data.resultCode == 0 ) { //если подписка прошла успешно
                       props.follow(u.id);
                     }
