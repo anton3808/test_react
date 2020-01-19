@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import { toggleIsFetching, setTotalUsersCount, setCurrentPage, follow, unfollow, setUsers } from '../../redux/users-reducer';
+import { toggleFollowingProgress, toggleIsFetching, setTotalUsersCount, setCurrentPage, follow, unfollow, setUsers } from '../../redux/users-reducer';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
 import { usersAPI } from '../../api/api';
@@ -45,6 +45,8 @@ class UsersContainer extends React.Component{
                   users = { this.props.users }
                   unfollow = { this.props.unfollow }
                   follow = { this.props.follow }
+                  toggleFollowingProgress = {this.props.toggleFollowingProgress}
+                  followingInProgress = {this.props.followingInProgress}
                                     
       /> 
     </>
@@ -58,12 +60,13 @@ let mapStateToProps = (state) => {//с помощью этой функции п
     pageSize: state.usersPage.pageSize,
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
-    isFetching: state.usersPage.isFetching
+    isFetching: state.usersPage.isFetching,
+    followingInProgress: state.usersPage.followingInProgress
   }
 }
 
 
 //передаем вторим параметром обэкт функций AC, а react сам обернет их и продиспатчит(вместо mapDispatchToProps)
 export default connect(mapStateToProps, 
-  { follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching }
+  { follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleFollowingProgress }
 )(UsersContainer) ;

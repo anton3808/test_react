@@ -20,15 +20,15 @@ export const usersAPI = {
 }
 
 
-export const unFollow = (id = 1) => {
-  return axios.delete( `follow/${id}`).then(response => {
-    return response.data
-  });
-}
+// export const unFollow = (id = 1) => {
+//   return axios.delete( `follow/${id}`).then(response => {
+//     return response.data
+//   });
+// }
 
-export const follow = (id = 1) => {
-  return axios.post( `follow/${id}`).then(response => {
-    return response.data
-  });
-}
+// export const follow = (id = 1) => {
+//   return axios.post( `follow/${id}`).then(response => {
+//     return response.data
+//   });
+// }
 
