@@ -1,3 +1,5 @@
+import { usersAPI } from "../api/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -77,12 +79,66 @@ const usersReducer = (state = initialState, action) => {//state = initialState -
 
 
 //actionCreator
-export const follow = (userId) => ({ type: FOLLOW, userId } )
-export const unfollow = (userId) => ( { type: UNFOLLOW, userId } )
+export const followSuccess = (userId) => ({ type: FOLLOW, userId } )
+export const unfollowSuccess = (userId) => ( { type: UNFOLLOW, userId } )
 export const setUsers = (users) => ( { type: SET_USERS, users } )//берем пользователей з сервака и засетаем в state
 export const setCurrentPage = (currentPage) => ( { type: SET_CURRENT_PAGE, currentPage } )
 export const setTotalUsersCount = (totalUsersCount) => ( { type: SET_TOTAL_USERS_COUNT, count: totalUsersCount } )
 export const toggleIsFetching = (isFetching) => ( { type: TOGGLE_IS_FETCHING, isFetching } )
 export const toggleFollowingProgress = (isFetching, userId) => ( { type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId } )
+
+
+
+//getUsers (функция висшего порядка) это функци якоторая может чтото принимать и которая возвращает thunk 
+export const getUsers = (currentPage, pageSize) => { //thunk function
+  
+  return (dispatch) => {
+    dispatch( toggleIsFetching(true) );
+
+    usersAPI.getUsers (currentPage, pageSize).then(data => {
+      dispatch( toggleIsFetching(false) );
+      dispatch( setUsers(data.items) );
+      dispatch( setTotalUsersCount(data.totalCount) );
+    });
+  }
+
+}
+
+
+export const follow = (userId) => { //thunk function
+  
+  return (dispatch) => {
+    dispatch( toggleFollowingProgress(true, userId) ); //disabled button
+
+    usersAPI.follow(userId).then(response => {
+      if( response.data.resultCode == 0 ) { //если подписка прошла успешно
+        dispatch( followSuccess(userId) );
+      }
+      dispatch( toggleFollowingProgress(false, userId) ); //remove disabled button
+    });
+  }
+
+}
+
+
+export const unfollow = (userId) => { //thunk function
+  
+  return (dispatch) => {
+    dispatch( toggleFollowingProgress(true, userId) ); //disabled button
+
+    usersAPI.unfollow(userId).then(response => {
+      if( response.data.resultCode == 0 ) { //если подписка прошла успешно
+        dispatch( unfollowSuccess(userId) );
+      }
+      dispatch( toggleFollowingProgress(false, userId) ); //remove disabled button
+    });
+  }
+
+}
+
+
+
+
+
 
 export default usersReducer;

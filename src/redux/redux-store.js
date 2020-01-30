@@ -4,6 +4,8 @@ import dialogsReducer from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import usersReducer from "./users-reducer";
 import authReducer from "./auth-reducer";
+import { applyMiddleware } from "redux";
+import thunkMiddleware from "redux-thunk";
 
 
 let reducers = combineReducers({//записиваем сюда все Reducer и комбинуем их методом combineReducers
@@ -14,7 +16,7 @@ let reducers = combineReducers({//записиваем сюда все Reducer �
   auth: authReducer,
 });
 
-let store = createStore(reducers);
+let store = createStore(reducers, applyMiddleware(thunkMiddleware) );//applyMiddleware - придпринять промежуточние слои, стобы вклиниться в конвеер
 
 window.store = store;
 

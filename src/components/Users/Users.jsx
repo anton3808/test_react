@@ -37,44 +37,11 @@ let Users = (props) => {
           <div>
             {u.followed
               ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => { 
-                // unFollow(u.id)
-
-                  props.toggleFollowingProgress(true, u.id); //disabled button
-
-                  axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                    withCredentials: true,
-                    headers: {
-                      "API-KEY": "95db1b82-ff10-47ab-a2fc-b4324afb1a65"
-                    }
-                  })
-                  .then(response => {
-                    if( response.data.resultCode == 0 ) { //если отподписка прошла успешно
-                      props.unfollow(u.id);
-                    }
-                    props.toggleFollowingProgress(false, u.id); //remove disabled button
-                  });
-                
-                
-
+                  props.unfollow(u.id); //disabled button
               }} >Unfollow</button>
               : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => { //переверяем ли клопка disabled
                   // some() - вибирает тот которий есть 
-                  props.toggleFollowingProgress(true, u.id); //disabled button
-
-                  axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                    withCredentials: true,
-                    headers: {
-                      "API-KEY": "95db1b82-ff10-47ab-a2fc-b4324afb1a65"
-                    }
-                  }).then(response => {
-                    if( response.data.resultCode == 0 ) { //если подписка прошла успешно
-                      props.follow(u.id);
-                    }
-                    props.toggleFollowingProgress(false, u.id); //remove disabled button
-                  });
-
-                
-
+                  props.follow(u.id); //disabled button
               }} >Follow</button>}  {/* при нажатии на кнопку визивается анонимная функция которая визивает колбек функцию */}
           </div>
         </span>
