@@ -17,25 +17,24 @@ export const usersAPI = {
           return response.data
         });
   },
-
   follow(userId) {
-    return instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`)
+    return instance.post(`follow/${userId}`)
   },
   unfollow(userId) {
-    return instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`)
+    return instance.delete(`follow/${userId}`)
+  },
+  getProfile(userId) {
+    return instance.get(`profile/` + userId); //запрос на сервак 
   }
+
 }
 
 
-// export const unFollow = (id = 1) => {
-//   return axios.delete( `follow/${id}`).then(response => {
-//     return response.data
-//   });
-// }
+export const authAPI = {
+  me() {
+    return instance.get(`auth/me`);
+  }
 
-// export const follow = (id = 1) => {
-//   return axios.post( `follow/${id}`).then(response => {
-//     return response.data
-//   });
-// }
+}
+
 
