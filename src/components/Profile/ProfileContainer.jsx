@@ -3,7 +3,7 @@ import * as axios from 'axios'; //библиотека для запросові
 import {connect} from "react-redux";
 import { getUserProfile } from '../../redux/profile-reducer';
 import Profile from './Profile';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 
 
 
@@ -23,6 +23,8 @@ class ProfileContainer extends React.Component{
 
 
   render() {//рендер
+    if ( !this.props.isAuth ) return <Redirect to={"/login"} />
+
     return (
       <Profile {...this.props} profile={this.props.profile} />//передаем все props(розкукоживаем их используя спред оператор)
     )
@@ -31,7 +33,8 @@ class ProfileContainer extends React.Component{
 }
 
 let mapStateToProps = (state) => ({
-  profile: state.profilePage.profile
+  profile: state.profilePage.profile,
+  isAuth: state.auth.isAuth
 });
 
 let withUrlDataContainerComponent = withRouter(ProfileContainer);//вернет новую компоненту отресует ProfileContainer и в нее закинутся данние из урла

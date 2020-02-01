@@ -6,7 +6,8 @@ import {connect} from "react-redux";
 
 const mapStateToProps = (state) => {//во время конектинга функция connect передаст в функцию mapStateToProps state
   return {//возврощает обьект, настраивает свойства з state
-    dialogsPage: state.dialogsPage
+    dialogsPage: state.dialogsPage,
+    isAuth: state.auth.isAuth
   }
 }
 
