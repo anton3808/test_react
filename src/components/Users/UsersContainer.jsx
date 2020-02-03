@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {getUsers, toggleFollowingProgress, setCurrentPage, follow, unfollow } from '../../redux/users-reducer';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 
 class UsersContainer extends React.Component{
@@ -17,7 +18,6 @@ class UsersContainer extends React.Component{
 
 
   onPageChanged = (pageNumber) => {
-
     this.props.getUsers(pageNumber, this.props.pageSize);
   }
 
@@ -53,8 +53,12 @@ let mapStateToProps = (state) => {//с помощью этой функции п
 }
 
 
+
+
+
+
 //передаем вторим параметром обэкт функций AC, а react сам обернет их и продиспатчит(вместо mapDispatchToProps)
-export default connect(mapStateToProps, 
+export default withAuthRedirect( connect(mapStateToProps, 
   { follow, unfollow, setCurrentPage,
     toggleFollowingProgress, getUsers }
-)(UsersContainer) ;
+)(UsersContainer) ) ;
