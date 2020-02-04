@@ -3,6 +3,7 @@ import { updateNewPostTextActionCreator, updateNewMessageBodyCreator, sendMessag
 import Dialogs from './Dialogs';
 import {connect} from "react-redux";
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 
 const mapStateToProps = (state) => {//во время конектинга функция connect передаст в функцию mapStateToProps state
@@ -23,13 +24,11 @@ let mapDispatchToProps = (dispatch) => {//во время конектинга �
 }
 
 
-let AuthRedirectComponent = withAuthRedirect( Dialogs ); //HOC
-
-
 
 // создоет контейнерну компоненту внутри этой компоненты рендерит призентационую компоненту и внутрь призентационой компоненты в качестве пропсов передает своиства которие сидят в функции f1, f2
+//вызиваем функцию connect, а она вернула нам другую функцию и мы вызиваем потом ту функцию которую вернул предыдущий вызов
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);//вызиваем функцию connect, а она вернула нам другую функцию и мы вызиваем потом ту функцию которую вернул предыдущий вызов
-
-
-export default DialogsContainer;
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthRedirect
+)(Dialogs); //вторим визивается функция которую вернул первий компосе
