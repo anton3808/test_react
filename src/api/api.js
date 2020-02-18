@@ -24,7 +24,22 @@ export const usersAPI = {
     return instance.delete(`follow/${userId}`)
   },
   getProfile(userId) {
+    console.warn('Obsolete method')
+    return profileAPI.getProfile(userId); //запрос на сервак 
+  }
+
+}
+
+
+export const profileAPI = {
+  getProfile(userId) {
     return instance.get(`profile/` + userId); //запрос на сервак 
+  },
+  getStatus(userId) {
+    return instance.get(`profile/status/` + userId); //запрос на сервак 
+  },
+  updateStatus(status) {
+    return instance.put(`profile/status`, { status: status });
   }
 
 }
