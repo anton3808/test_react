@@ -31,6 +31,17 @@ class ProfileStatus extends React.Component {
   }
 
 
+  componentDidUpdate(prevProps, prevState){
+
+    if(prevProps.status !== this.props.status) { //перевираем ли статус изменился
+      this.setState({
+        status: this.props.status //засинхранизируем status
+      });
+    }
+    
+  }
+
+
   //onBlur - визивается когда фокус в елементе, а потом фокус с елемента уходит
  render() {
     return (
